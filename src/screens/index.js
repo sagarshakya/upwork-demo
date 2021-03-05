@@ -1,1 +1,1 @@
-export * from './sign-up-screen';
+export * from './phone-verfication-screen';
