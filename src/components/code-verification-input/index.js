@@ -36,14 +36,12 @@ export const CodeVerificationInput = ({value, setFieldValue, ...props}) => {
       textContentType="oneTimeCode"
       renderCell={({index, symbol, isFocused}) => (
         <View
+          key={index}
           style={[
             styles.cellContainer,
             index !== 0 && {marginLeft: spacings.sm},
           ]}>
-          <Text
-            key={index}
-            style={styles.cell}
-            onLayout={getCellOnLayoutHandler(index)}>
+          <Text style={styles.cell} onLayout={getCellOnLayoutHandler(index)}>
             {symbol || (isFocused ? <Cursor /> : null)}
           </Text>
         </View>

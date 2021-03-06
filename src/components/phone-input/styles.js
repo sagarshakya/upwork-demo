@@ -29,5 +29,6 @@ export default StyleSheet.create({
   textInput: {
     ...typography.p2,
     flex: 1,
+    padding: 0,
   },
 });
