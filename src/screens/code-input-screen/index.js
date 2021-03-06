@@ -1,52 +1,54 @@
 import React from 'react';
-import {KeyboardAvoidingView, Text, View, Platform} from 'react-native';
+import {View, KeyboardAvoidingView, Platform, Text, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Formik} from 'formik';
 
 import {spacings} from '../../config/theme';
 
-import {Button, Header, PhoneInput, VerticalSpacer} from '../../components';
+import {
+  Button,
+  CodeVerificationInput,
+  Header,
+  VerticalSpacer,
+} from '../../components';
 
 import styles from './styles';
 
-export const PhoneVerificationScreen = ({navigation}) => {
+export const CodeInputScreen = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         enabled>
         <Header
-          title="Continue with Phone"
-          subtitle="For faster login, and to keep the community safe, we need your number"
+          title="Verify Phone"
+          subtitle={`Code sent to ${route.params.phoneNumber}`}
         />
         <Formik
-          initialValues={{phoneNumber: ''}}
+          initialValues={{verificationCode: ''}}
           onSubmit={(values) => {
-            navigation.navigate('CodeInputScreen', {
-              phoneNumber: values.phoneNumber,
-            });
+            Alert.alert('Success', 'You have been verified', [
+              {
+                text: 'OK',
+                onPress: () => navigation.navigate('PhoneVerification'),
+              },
+            ]);
           }}>
           {({handleSubmit, setFieldValue, values}) => (
             <View style={styles.formContainer}>
-              <PhoneInput
-                value={values.phoneNumber}
+              <CodeVerificationInput
+                value={values.verificationCode}
                 setFieldValue={setFieldValue}
               />
-              <VerticalSpacer size={spacings.xl} />
-              <Button label="Skip for now" mode="text" />
               <VerticalSpacer size={spacings.lg} />
               <Text style={styles.buttonHeading}>Already have an account</Text>
               <VerticalSpacer size={spacings.md} />
-              <Button label="Log In" mode="text" />
+              <Button label="Request Again" mode="text" />
               <VerticalSpacer size={spacings.lg} />
               <Button
-                label={
-                  values.phoneNumber.length < 14
-                    ? 'Text Me'
-                    : `Text ${values.phoneNumber}`
-                }
+                label="Verify and Create Account"
                 mode="solid"
-                disabled={values.phoneNumber.length < 14}
+                disabled={values.verificationCode.length < 4}
                 onPress={handleSubmit}
               />
             </View>

@@ -3,3 +3,4 @@ export * from './phone-input';
 export * from './vertical-spacer';
 export * from './horizontal-spacer';
 export * from './button';
+export * from './code-verification-input';

@@ -15,11 +15,11 @@ export const Button = ({
     mode === 'solid' && disabled && styles.disabledContainer;
   const buttonStyle = mode === 'solid' && styles.solidModeButton;
   const textStyle =
-    mode === 'text' ? styles.textModeTextStyle : styles.solidModeText;
+    mode === 'text' ? styles.textModeText : styles.solidModeText;
 
   return (
     <View style={[containerStyle, disabledContainerStyle, style]}>
-      <TouchableOpacity style={buttonStyle} {...props}>
+      <TouchableOpacity disabled={disabled} style={buttonStyle} {...props}>
         <Text style={[styles.text, textStyle]}>{label}</Text>
       </TouchableOpacity>
     </View>

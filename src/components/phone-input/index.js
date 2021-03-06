@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, TextInput, Image} from 'react-native';
 
 import {colors} from '../../config/theme';
